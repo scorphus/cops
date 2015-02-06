@@ -1,0 +1,24 @@
+# Adjust this settings and then add them to lighttpd configuration
+
+# The mod_auth has to be enabled, uncomment the following if it is not enabled
+# by default:
+# server.modules += ("mod_auth")
+
+# If things don't work, set debug level 2 and check the logs, they might help
+auth.debug = 0
+auth.backend = "htdigest"
+
+# Use Apache's tool htdigest to generate the htdigest.userfile
+#
+# root@debian:~# htdigest -c /path/to/htdigest.userfile "COPS" username
+#
+auth.backend.htdigest.userfile = "/path/to/htdigest.userfile"
+
+# You may change the realm as long as it is the same as the one used above
+auth.require = (
+	"/path/to/cops/web/root" => (
+		"method" => "digest",
+		"realm" => "COPS",
+		"require" => "valid-user",
+	),
+)

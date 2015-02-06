@@ -7,3 +7,4 @@ cops.zip
 cops.sublime-*
 config_local.php
 config_local.*.php
+lighttpd-auth.conf
